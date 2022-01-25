@@ -60,4 +60,3 @@ const Hadi = new Employeedata('1006', ' Hadi Ahmad', `Finance`, `Mid-Senior`);
 Hadi.salaryFinal();
 
 
-Ghazi.salaryFinal();
