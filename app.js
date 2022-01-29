@@ -60,24 +60,57 @@
 // Hadi.salaryFinal();
 
 let employeeeForm = document.getElementById('employeeForm');
+let dataSection = document.getElementById('data')
+let mainn= document.getElementById("main")
 
 function Employeedata(fullName, employeeId, department, level) {
     this.name = fullName;
     this.employeeId = employeeId;
     this.department = department;
     this.level = level;
-    this.imageUrl = `./image/${this.name}.jpg`;
+    this.imageUrl = `/image.jpg/${this.name}.jpg`;
     //  `./images/${this.fullName}.PNG`;  path of employee image depend on his name
 
 }
 
+
+let h1 = document.createElement(`h1`);
+mainn.appendChild(h1);
+h1.textContent = `Employee Data : `
+
 Employeedata.prototype.render = function () {
 
 
-    document.write(`<p>Name: ${this.name}   -ID: ${randomIdnum()}</p>`);
-    document.write(`<p> Department: ${this.department}     level: ${this.level}</p>`);
+    // document.write(`<p>Name: ${this.name}   -ID: ${randomIdnum()}</p>`);
+    // document.write(`<p> Department: ${this.department}     level: ${this.level}</p>`);
 
-    document.write(`<p> ${this.Salary() - this.Salary() * 0.0075}</p> `);
+    // document.write(`<p> ${this.Salary() - this.Salary() * 0.0075}</p> `);
+
+
+    let img = document.createElement('img');
+    img.setAttribute('src', `${this.imageUrl}`);
+    // img.setAttribute('alt',this.name);
+    mainn.appendChild(img);
+
+    let p1 = document.createElement('p');
+    mainn.appendChild(p1);
+    p1.textContent =   `Name: ${this.name}  -ID: ${randomIdnum()}` ;
+
+    let p2 = document.createElement('p');
+    mainn.appendChild(p2);
+    p2.textContent = `Department: ${this.department}     level: ${this.level}` ;
+
+    let p3 = document.createElement('p');
+    mainn.appendChild(p3);
+    p3.textContent = ` ${this.Salary() - this.Salary() * 0.0075}   ` ;
+
+      
+
+
+    // let img = document.createElement('img');
+    // img.setAttribute('src', `${this.imageUrl}`);
+    // // img.setAttribute('alt',this.name);
+    // mainn.appendChild(img);
 
 }
 
@@ -114,7 +147,7 @@ function handelSubmit(event) {
     let name = event.target.name.value;
     let department = event.target.department.value;
     let level = event.target.level.value;
-    let imageUrl = event.target.imageUrl.imageUrl;
+    // let imageUrl = event.target.imageUrl.imageUrl;
     // console.log(`${this.fullName}  ${this.department}   ${this.level}  ${this.imageUrl}`);
 
     let newdata = new Employeedata(name, randomIdnum(), department, level,);
@@ -129,7 +162,7 @@ employeeeForm.addEventListener('submit', handelSubmit);
 
 
 
-let Ghazi = new Employeedata(`Ghazi Samer`, randomIdnum(), `Administration`, `Senior`);
+let Ghazi = new Employeedata(`Ghazi Samer`, randomIdnum(), `Administration`, `Senior` );
 Ghazi.render(); 
 let Lana = new Employeedata(`Lana Ali`, randomIdnum(), `Finance`, `Senior`);
 Lana.render();
@@ -143,3 +176,21 @@ let Rana = new Employeedata(`Rana Saleh`, randomIdnum(), `Development`, `Junior`
 Rana.render();
 let Hadi = new Employeedata(`Hadi Ahmad`, randomIdnum(), `Finance`, `Mid-Senior`);
 Hadi.render();
+
+
+{/* <img src="/image.jpg/Ghazi.jpg" style="width:400px;height:400px; margin-left: 2%;">"
+<img src="/image.jpg/Hadi.jpg" style="width:400px;height:400px; margin-left: 2%;">"
+<img src="/image.jpg/Lana.jpg" style="width:400px;height:400px; margin-left: 2%;">"
+<img src="/image.jpg/Omar.jpg" style="width:400px;height:400px; margin-left: 2%;">"
+<img src="/image.jpg/Rana.jpg" style="width:400px;height:400px; margin-left: 2%;">"
+<img src="/image.jpg/Safi.jpg" style="width:400px;height:400px; margin-left: 2%;">"
+<img src="/image.jpg/Tamara.jpg" style="width:400px;height:400px; margin-left: 2%;">" */}
+
+// #main div {
+//     width: 13px;
+//     height:13px;
+
+
+
+//     }
+
