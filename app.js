@@ -61,7 +61,10 @@
 
 let employeeeForm = document.getElementById('employeeForm');
 let dataSection = document.getElementById('data')
-let mainn= document.getElementById("main")
+let mainn = document.getElementById("main")
+
+let allEmployee = [];
+checkLocalAndPush();
 
 function Employeedata(fullName, employeeId, department, level) {
     this.name = fullName;
@@ -75,10 +78,20 @@ function Employeedata(fullName, employeeId, department, level) {
 
 
 let h1 = document.createElement(`h1`);
-mainn.appendChild(h1);
+employeeeForm.appendChild(h1);
 h1.textContent = `Employee Data : `
 
-Employeedata.prototype.render = function () {
+
+
+function render (allEmployee) {
+    dataSection.innerHTML = ``;
+
+
+    let div = document.createElement('div');
+    dataSection.appendChild(div);
+    for (let i = 0; i < allEmployee.length; i++) {
+
+
 
 
     // document.write(`<p>Name: ${this.name}   -ID: ${randomIdnum()}</p>`);
@@ -88,23 +101,23 @@ Employeedata.prototype.render = function () {
 
 
     let img = document.createElement('img');
-    img.setAttribute('src', `${this.imageUrl}`);
+    img.setAttribute('src', `${allEmployee[i].imageUrl}`);
     // img.setAttribute('alt',this.name);
-    mainn.appendChild(img);
+    div.appendChild(img);
 
     let p1 = document.createElement('p');
-    mainn.appendChild(p1);
-    p1.textContent =   `Name: ${this.name}  -ID: ${randomIdnum()}` ;
+    div.appendChild(p1);
+    p1.textContent = `Name: ${allEmployee[i].name}  -ID: ${randomIdnum()}`;
 
     let p2 = document.createElement('p');
-    mainn.appendChild(p2);
-    p2.textContent = `Department: ${this.department}     level: ${this.level}` ;
+    div.appendChild(p2);
+    p2.textContent = `Department: ${allEmployee[i].department}     level: ${allEmployee[i].level}`;
 
     let p3 = document.createElement('p');
-    mainn.appendChild(p3);
-    p3.textContent = ` ${this.Salary() - this.Salary() * 0.0075}   ` ;
+    div.appendChild(p3);
+    // p3.textContent = ` ${Salary() -  Salary() * 0.0075}   `;
 
-      
+return;
 
 
     // let img = document.createElement('img');
@@ -112,7 +125,7 @@ Employeedata.prototype.render = function () {
     // // img.setAttribute('alt',this.name);
     // mainn.appendChild(img);
 
-}
+}}
 
 function randomIdnum() {
     return Math.floor(Math.random() * 10000);
@@ -123,7 +136,7 @@ function randomIdnum() {
 
 
 Employeedata.prototype.Salary = function () {
-    var level = this.level;
+    var level ;
 
     if (level == "Junior") {
         var min = 500;
@@ -141,6 +154,33 @@ Employeedata.prototype.Salary = function () {
 }
 
 
+//  function salaryFinal () {
+
+//     document.write(`<p> The employee  ${this.fullName} and his/her salary is ${this.Salary() - this.Salary() * 0.0075} </p> `);
+
+//  }
+
+ let Ghazi = new Employeedata(`Ghazi Samer`, randomIdnum(), `Administration`, `Senior`);
+ allEmployee.push(  Ghazi);
+ render();
+
+ let Lana = new Employeedata(`Lana Ali`, randomIdnum(), `Finance`, `Senior`);
+render(Lana);
+ let Tamara = new Employeedata(`Tamara Ayoub`, randomIdnum(), `Marketing`, `Senior`);
+//  Tamara.render();
+ let Safi = new Employeedata(`Safi Walid`, randomIdnum(), `Administration`, `Mid-Senior`);
+//  Safi.render();
+ let Omar = new Employeedata(`Omar Zaid`, randomIdnum(), `Development	`, `Senior`);
+//  Omar.render();
+ let Rana = new Employeedata(`Rana Saleh`, randomIdnum(), `Development`, `Junior`);
+//  Rana.render(e);
+ let Hadi = new Employeedata(`Hadi Ahmad`, randomIdnum(), `Finance`, `Mid-Senior`);
+//  Hadi.render();
+ 
+
+
+
+
 function handelSubmit(event) {
     event.preventDefault();
 
@@ -151,7 +191,23 @@ function handelSubmit(event) {
     // console.log(`${this.fullName}  ${this.department}   ${this.level}  ${this.imageUrl}`);
 
     let newdata = new Employeedata(name, randomIdnum(), department, level,);
-    newdata.render()
+    newdata.Salary();
+    // newdata.randomIdnum();
+
+
+    allEmployee.push(newdata);
+    // let jsonArr=jsonArra(allEmployee)
+    // let jsonArr = toJSON();
+    let jsonArr=jsonArra(allEmployee)
+
+    // let jsonArr = toJSON();
+    saveToLocalS(jsonArr);
+
+
+    // let jsonArr=jsonArra(allEmployee)
+    saveToLocalS(jsonArr);
+
+    render(readFromLocalS());
 
 }
 
@@ -162,20 +218,74 @@ employeeeForm.addEventListener('submit', handelSubmit);
 
 
 
-let Ghazi = new Employeedata(`Ghazi Samer`, randomIdnum(), `Administration`, `Senior` );
-Ghazi.render(); 
-let Lana = new Employeedata(`Lana Ali`, randomIdnum(), `Finance`, `Senior`);
-Lana.render();
-let Tamara = new Employeedata(`Tamara Ayoub`, randomIdnum(), `Marketing`, `Senior`);
-Tamara.render();
-let Safi = new Employeedata(`Safi Walid`, randomIdnum(), `Administration`, `Mid-Senior`);
-Safi.render();
-let Omar = new Employeedata(`Omar Zaid`, randomIdnum(), `Development	`, `Senior`);
-Omar.render();
-let Rana = new Employeedata(`Rana Saleh`, randomIdnum(), `Development`, `Junior`);
-Rana.render();
-let Hadi = new Employeedata(`Hadi Ahmad`, randomIdnum(), `Finance`, `Mid-Senior`);
-Hadi.render();
+// let Ghazi = new Employeedata(`Ghazi Samer`, randomIdnum(), `Administration`, `Senior`);
+// // Ghazi.render();
+// let Lana = new Employeedata(`Lana Ali`, randomIdnum(), `Finance`, `Senior`);
+// // Lana.render();
+// let Tamara = new Employeedata(`Tamara Ayoub`, randomIdnum(), `Marketing`, `Senior`);
+// // Tamara.render();
+// let Safi = new Employeedata(`Safi Walid`, randomIdnum(), `Administration`, `Mid-Senior`);
+// // Safi.render();
+// let Omar = new Employeedata(`Omar Zaid`, randomIdnum(), `Development	`, `Senior`);
+// // Omar.render();
+// let Rana = new Employeedata(`Rana Saleh`, randomIdnum(), `Development`, `Junior`);
+// // Rana.render();
+// let Hadi = new Employeedata(`Hadi Ahmad`, randomIdnum(), `Finance`, `Mid-Senior`);
+// // Hadi.render();
+
+
+function checkLocalAndPush() {
+    if (allEmployee.length == 0) {
+        let arr = readFromLocalS();
+        if (arr.length != 0) {
+            allEmployee = arr;
+        }
+    }
+}
+
+
+function jsonArra(arr) {
+    let jsonArra = JSON.stringify(arr);
+    return jsonArra;
+}
+
+
+
+function readFromLocalS() {
+    let jsonArr = localStorage.getItem('allEmployee');
+    let arr = JSON.parse(jsonArr);
+    if (arr !== null) {
+        return arr;
+    } else {
+        return [];
+    }
+}
+
+// function forLastupdate() {
+//     if (allEmployee.length == 0) {
+//         let arr = readFromLocalS();
+//         if (arr.length != 0)
+//         allEmployee = arr;
+//     }
+
+// }
+
+// function toJSON() {
+//     let jsonArray = JSON.stringify(allEmployee);
+//     return jsonArray;
+// }
+
+
+function saveToLocalS(jsonArra) {
+    localStorage.setItem('allEmployee', jsonArra)
+}
+
+
+render(readFromLocalS());
+
+
+
+
 
 
 {/* <img src="/image.jpg/Ghazi.jpg" style="width:400px;height:400px; margin-left: 2%;">"
@@ -193,4 +303,3 @@ Hadi.render();
 
 
 //     }
-
